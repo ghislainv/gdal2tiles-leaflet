@@ -3,11 +3,15 @@
           <head>
             <meta charset="utf-8">
             <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-            <title>Deforestation probability</title>
+            <title>ForestAtRisk Madagascar</title>
 
             <!-- Leaflet -->
-            <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
-            <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+  integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+  crossorigin=""></script>
 
             <style>
                 body { margin:0; padding:0; }
@@ -41,19 +45,19 @@
 
         // Base layers
         //  .. OpenStreetMap
-        var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors', minZoom: 0, maxZoom: 14});
+        var osm = L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors', minZoom: 0, maxZoom: 14});
 
         //  .. CartoDB Positron
-        var cartodb = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>', minZoom: 0, maxZoom: 14});
+        //var cartodb = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>', minZoom: 0, maxZoom: 14});
 
         //  .. OSM Toner
-        var toner = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.', minZoom: 0, maxZoom: 14});
+        //var toner = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.', minZoom: 0, maxZoom: 14});
 
         //  .. White background
-        var white = L.tileLayer("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAAA1BMVEX///+nxBvIAAAAH0lEQVQYGe3BAQ0AAADCIPunfg43YAAAAAAAAAAA5wIhAAAB9aK9BAAAAABJRU5ErkJggg==", {minZoom: 0, maxZoom: 14});
+        //var white = L.tileLayer("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAAA1BMVEX///+nxBvIAAAAH0lEQVQYGe3BAQ0AAADCIPunfg43YAAAAAAAAAAA5wIhAAAB9aK9BAAAAABJRU5ErkJggg==", {minZoom: 0, maxZoom: 14});
 
         // Overlay layers (TMS)
-        var prob2010 = L.tileLayer('./tiles_prob2010/{z}/{x}/{y}.png', {tms: true, opacity: 0.7, attribution: "<a href='https://www.cirad.fr'>CIRAD</a>", minZoom: 0, maxZoom: 14});
+        //var prob2010 = L.tileLayer('./tiles_prob2010/{z}/{x}/{y}.png', {tms: true, opacity: 0.7, attribution: "<a href='https://www.cirad.fr'>CIRAD</a>", minZoom: 0, maxZoom: 14});
 	
 	// Overlay layers (TMS)
         var proj2050 = L.tileLayer('./tiles_proj2050/{z}/{x}/{y}.png', {tms: true, opacity: 0.7, attribution: "<a href='https://www.cirad.fr'>CIRAD</a>", minZoom: 0, maxZoom: 14});
@@ -68,8 +72,9 @@
             layers: [osm, proj2050]
         });
 
-        var basemaps = {"OpenStreetMap": osm, "CartoDB Positron": cartodb, "Stamen Toner": toner, "Without background": white}
-        var overlaymaps = {"Probability of deforestation": prob2010, "Forest cover change 2010-2050": proj2050}
+        var basemaps = {"OpenStreetMap": osm};
+        //var overlaymaps = {"Probability of deforestation": prob2010, "Forest cover change 2010-2050": proj2050}
+	var overlaymaps = {"Forest cover change 2010-2050": proj2050};
 
         // Title
         var title = L.control();
@@ -81,7 +86,7 @@
         title.update = function(props) {
             this._div.innerHTML = "Deforestation projections";
         };
-        title.addTo(map);
+        //title.addTo(map);
 
         // Note
         var src = 'Projects: <a href="https://bioscenemada.cirad.fr">BioSceneMada</a> | <a href="https://forestatrisk.cirad.fr">ForestAtRisk</a>';
@@ -95,7 +100,6 @@
             this._div.innerHTML = src;
         };
         title.addTo(map);
-
 
         // Add base layers
         L.control.layers(basemaps, overlaymaps, {collapsed: false}).addTo(map);
