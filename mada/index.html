@@ -58,7 +58,7 @@
 
 				// Overlay layers (TMS)
 				var fcc = L.tileLayer('./tiles_fcc/{z}/{x}/{y}.png', {tms: true, opacity: 0.7, attribution: "<a href='https://www.cirad.fr'>CIRAD</a>", minZoom: 0, maxZoom: 14});
-				var prob2010 = L.tileLayer('./tiles_prob2010/{z}/{x}/{y}.png', {tms: true, opacity: 0.7, attribution: "<a href='https://www.cirad.fr'>CIRAD</a>", minZoom: 0, maxZoom: 14});
+				var prob2010 = L.tileLayer('./tiles_prob2010/{z}/{x}/{y}.png', {tms: true, opacity: 0.7, attribution: "<a href='https://www.cirad.fr'>CIRAD</a>, <a href='https://ec.europa.eu/jrc/en'>JRC</a>", minZoom: 0, maxZoom: 14});
   			var proj2050 = L.tileLayer('./tiles_proj2050/{z}/{x}/{y}.png', {tms: true, opacity: 0.7, attribution: "<a href='https://www.cirad.fr'>CIRAD</a>, <a href='https://ec.europa.eu/jrc/en'>JRC</a>", minZoom: 0, maxZoom: 14});
 
         // Map
@@ -71,10 +71,11 @@
         });
 
         var basemaps = {"OpenStreetMap": osm};
-        //var overlaymaps = {"Probability of deforestation": prob2010, "Forest cover change 2010-2050": proj2050}
-	var overlaymaps = {"Past deforestation 2000-2017": fcc,
-	"Deforestation probability 2010": prob2010,
-	"Projected deforestation 2010-2050": proj2050};
+     	  var overlaymaps = {
+     	  	"Past deforestation 2000-2017": fcc,
+     	  	"Deforestation probability 2010": prob2010,
+     	  	"Projected deforestation 2010-2050": proj2050
+     	  };
 
         // Title
         var title = L.control();
@@ -89,7 +90,7 @@
         //title.addTo(map);
 
         // Note
-        var src = 'Projects: <a href="https://bioscenemada.cirad.fr">BioSceneMada</a> | <a href="https://forestatrisk.cirad.fr">ForestAtRisk</a>';
+        var src = 'Projects: <a href="https://bioscenemada.cirad.fr">BioSceneMada</a> | <a href="https://forestatrisk.cirad.fr">ForestAtRisk</a> | <a href="https://forobs.jrc.ec.europa.eu/roadless/">RoadlessForest</a>';
         var title = L.control({position: 'bottomleft'});
         title.onAdd = function(map) {
             this._div = L.DomUtil.create('div', 'ctl src');
