@@ -18,5 +18,11 @@
 gdal_translate -projwin 919980 8360010 1091970 8220000 -co "COMPRESS=DEFLATE" -co "PREDICTOR=2" -co "ZLEVEL=9" data/fcc_recent.tif data/fcc_recent_masoala.tif
 gdaldem color-relief data/fcc_recent_masoala.tif fcc_color_file.txt data/fcc_RGB_masoala.tif -alpha -co "COMPRESS=DEFLATE" -co "PREDICTOR=2" -co "ZLEVEL=9"
 gdalwarp -s_srs EPSG:32738 -t_srs EPSG:3857 -r near -co "COMPRESS=DEFLATE" -co "PREDICTOR=2" -co "ZLEVEL=9" data/fcc_RGB_masoala.tif data/fcc_RGB_masoala_mercator.tif 
-gdal_translate data/fcc_RGB_masoala_mercator.tif data/fcc_masoala.mbtiles
-gdaladdo -r nearest data/fcc_masoala.mbtiles 2 4 8 16
+gdal_translate -co "RESAMPLING=NEAREST" data/fcc_RGB_masoala_mercator.tif data/fcc_masoala_bioscene.mbtiles
+gdaladdo -r nearest data/fcc_masoala_bioscene.mbtiles 2 4 8 16
+
+#===== Past deforestation Masoala Christelle for Locus (mbtiles)
+#gdaldem color-relief data/fcc_masoala_christelle.tif fcc_color_file.txt data/fcc_RGB_masoala_christelle.tif -alpha -co "COMPRESS=DEFLATE" -co "PREDICTOR=2" -co "ZLEVEL=9"
+#gdalwarp -s_srs EPSG:4326 -t_srs EPSG:3857 -r near -co "COMPRESS=DEFLATE" -co "PREDICTOR=2" -co "ZLEVEL=9" data/fcc_RGB_masoala_christelle.tif data/fcc_RGB_masoala_christelle_mercator.tif 
+#gdal_translate -co "RESAMPLING=NEAREST" data/fcc_RGB_masoala_christelle_mercator.tif data/fcc_masoala_christelle.mbtiles
+#gdaladdo -r nearest data/fcc_masoala_christelle.mbtiles 2 4 8 16
